@@ -5,6 +5,28 @@ from django.contrib.auth.decorators import login_required
 from .forms import ToDoForm, RegisterationForm
 from . import models
 # Create your views here.
+
+
+def login_page(re):
+    context = {}
+    if re.method == 'POST':
+        username = re.POST.get('username')
+        password = re.POST.get('password')
+        user = authenticate(username=username, password= password)
+        if user:
+            login(re, user) 
+            return redirect('/')
+        else:
+            context['message'] = ['wrong password or username!']
+    return render(re, 'registration/login.html', context)
+
+
+
+def log_out(re):
+    if re.user.is_authenticated:
+        logout(re)
+    return redirect('/home')
+
 @login_required(login_url='/login')
 def home(request):
     if request.method == 'POST':
