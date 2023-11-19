@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class ToDo(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ToDoNote = models.CharField(max_length=100)
+    ToDoNote = models.CharField(max_length=100,unique=True)
     Create_Date = models.DateField(auto_now_add=True)
     Create_Time = models.TimeField(auto_now_add=True)
     is_done = models.BooleanField(default=False)

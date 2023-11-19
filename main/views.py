@@ -26,7 +26,7 @@ def home(request):
 
 
 @login_required(login_url='/login')
-def delete_todo(request, pk=12):
+def delete_todo(request, pk=None):
     
     ToDo = models.ToDo.objects.filter(id=pk).first()
     if request.user == ToDo.user:
@@ -34,10 +34,10 @@ def delete_todo(request, pk=12):
     
     return redirect('/home')
         
+        
 @login_required(login_url='/login')
 def check_uncheck(request, pk):
     
-    print('aaaaaaaaaaaaaaaaaaaaaaa')
     ToDo = models.ToDo.objects.filter(id=pk).first()
     if request.user == ToDo.user:
         if ToDo.is_done:
@@ -49,15 +49,20 @@ def check_uncheck(request, pk):
     return redirect('/home')
     
     
+
 def sign_up(request):
+    if request.user.is_authenticated:
+        logout(request) 
     if request.method == 'POST':
         form = RegisterationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('/home')
+        
     else:
         form = RegisterationForm()
         
     return render(request, 'registration/sign-up.html', {'form':form})
+
 
