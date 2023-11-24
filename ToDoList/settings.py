@@ -19,15 +19,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
+import os 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-20#$k6!q%_l5hlz%tds6qymh2hx17-2s*=mds#mio(+_xuc8t_'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = str(os.environ.get('DEBUG')) == '1'
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = [
+    '*'
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,8 +41,10 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'crispy_forms', 
     'crispy_bootstrap5',
+    "django_htmx",
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = 'ToDoList.urls'

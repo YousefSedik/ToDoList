@@ -1,5 +1,6 @@
 {% load crispy_forms_tags %}
 {% load static %}
+<script src="/path/to/htmx.min.js"></script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,9 +47,6 @@
 
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                                 </form>
-                            </div>
-
-                            <div>
                                 <p class="mb-0">Don't have an account? <a href="{% url 'sign_up' %}" class="text-white-50 fw-bold">Sign Up</a></p>
                             </div>
                         </div>
