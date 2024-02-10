@@ -30,9 +30,7 @@ class ToDoForm(forms.ModelForm):
         self.user = kwargs.pop('user', None)
         super(ToDoForm, self).__init__(*args, **kwargs)
         self.fields['ToDoNote'].label = 'ToDo'
-<<<<<<< HEAD
     
-=======
     
     def clean(self):
         to_clean = super().clean()
@@ -42,7 +40,5 @@ class ToDoForm(forms.ModelForm):
         if is_exist:
             self.add_error('ToDoNote', 'TODO Already Exists! ')
             
-            # raise forms.ValidationError('TODO Already Exists! ')
         return to_clean 
         
->>>>>>> e805643c6c1c6d92a486bcce138cde33e465573e
