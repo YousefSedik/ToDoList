@@ -47,6 +47,7 @@ def log_out(re):
 
 @login_required(login_url='/login')
 def home(request):
+<<<<<<< HEAD
        
     form = ToDoForm()
     all_todos = models.ToDo.objects.filter(user=request.user)
@@ -63,6 +64,24 @@ def add(request):
             todo_to_context.save()
             return render(request, 'main/todoelement.html', context={'todo':todo_to_context})
     return HttpResponse('')
+=======
+    
+    if request.method == 'POST':
+        form = ToDoForm(request.POST or None, user=request.user)
+        if form.is_valid():
+            ToDoForm.clean
+            todo = form.save(commit=False)
+            todo.user = request.user
+            todo.save()
+
+    else:    
+        form = ToDoForm()
+    try:
+        all_todos = models.ToDo.objects.filter(user=request.user)
+    except:
+        all_todos = None
+    return render(request, 'main/home.html', context={'all_todos':all_todos, 'form':form})
+>>>>>>> e805643c6c1c6d92a486bcce138cde33e465573e
 
 
 @login_required(login_url='/login')

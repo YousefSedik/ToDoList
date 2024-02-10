@@ -30,4 +30,19 @@ class ToDoForm(forms.ModelForm):
         self.user = kwargs.pop('user', None)
         super(ToDoForm, self).__init__(*args, **kwargs)
         self.fields['ToDoNote'].label = 'ToDo'
+<<<<<<< HEAD
     
+=======
+    
+    def clean(self):
+        to_clean = super().clean()
+        is_exist = ToDo.objects.filter(Q(ToDoNote=to_clean.get('ToDoNote')) & Q(user=self.user) )
+        if len(to_clean.get('ToDoNote')) < 5:
+            self.add_error('ToDoNote', 'TODO Should be more than 4 charcaters! ')
+        if is_exist:
+            self.add_error('ToDoNote', 'TODO Already Exists! ')
+            
+            # raise forms.ValidationError('TODO Already Exists! ')
+        return to_clean 
+        
+>>>>>>> e805643c6c1c6d92a486bcce138cde33e465573e

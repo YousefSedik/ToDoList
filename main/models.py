@@ -12,6 +12,7 @@ class ToDo(models.Model):
     is_done = models.BooleanField(default=False)
 
     class Meta:
+        unique_together = ['user', 'ToDoNote']
         ordering = ['is_done', 'Create_Date', 'Create_Time']
 
     def __str__(self):
