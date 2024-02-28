@@ -1,0 +1,7 @@
+<ul class="list-group" id="list-group">
+    {% for todo in all_todos %}
+      {% include 'main/todoelement.html' %}
+    {% empty %}
+      <li class="list-group">Your List Is Empty :)</li>
+    {% endfor %}
+</ul>  
