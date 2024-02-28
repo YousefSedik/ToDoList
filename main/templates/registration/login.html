@@ -33,11 +33,10 @@
                             <p class="text-white-50 mb-5">Please enter your login and password!</p>
 
                             {% for mee in message %}
-                            <h5>{{mee}}</h5>
+                                <h5>{{mee}}</h5>
                             {% endfor %}
-
                             <div class="form-outline form-white mb-4">
-                                <form class="vh-100 gradient-custom" method="POST" action="">
+                                <form class="vh-100 gradient-custom" method="POST">
                                     {% csrf_token %}
                                     <input type="username" name="username" class="input-field">
                                     <br><br>
@@ -47,9 +46,10 @@
                                             password?</a></p>
 
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-                                </form>
-                                <p class="mb-0">Don't have an account? <a href="{% url 'sign_up' %}"
+                               <p class="mb-0">Don't have an account? <a href="{% url 'sign_up' %}"
                                         class="text-white-50 fw-bold">Sign Up</a></p>
+                                     </form>
+                                
                             </div>
                         </div>
                     </div>
